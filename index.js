@@ -3,35 +3,41 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoutes = require("./routes/Authrouter");
-
 require("dotenv").config();
-const PORT = process.env.PORT || 4000;
-app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`server stated at SUCCESFULLy ${PORT}`);
-});
-
+// DB connection
 const dbConnect = require("./config/database");
-const event = require("./models/event");
 dbConnect();
 
+// Middleware
+app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors());
 
-// const cors = require("cors");
+const allowedOrigins = [
+  "https://event-w-f.vercel.app",
+  "https://nms-frontend-kappa.vercel.app"
+];
 
-// Allow requests from your frontend domain
 app.use(cors({
-  origin: "https://event-w-f.vercel.app",
-  credentials: true // only if you're using cookies
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 
-
+// Routes
 app.use("/api/v1", userRoutes);
 
-
 app.get("/", (req, res) => {
-  res.send(`<h1>This
-       is hoMEPAGE </h1>`);
+  res.send(`<h1>This is hoMEPAGE</h1>`);
+});
+
+// Server start
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server started successfully at ${PORT}`);
 });
