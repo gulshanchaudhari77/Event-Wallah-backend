@@ -19,6 +19,15 @@ dbConnect();
 app.use(bodyParser.json());
 app.use(cors());
 
+// const cors = require("cors");
+
+// Allow requests from your frontend domain
+app.use(cors({
+  origin: "https://event-w-f.vercel.app",
+  credentials: true // only if you're using cookies
+}));
+
+
 app.use("/api/v1", userRoutes);
 
 
