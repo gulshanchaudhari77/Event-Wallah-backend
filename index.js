@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const userRoutes = require("./routes/Authrouter");
+const uploadRoutes=require("./routes/upload")
 require("dotenv").config();
 
 // DB connection
@@ -31,6 +32,7 @@ app.use(cors({
 
 // Routes
 app.use("/api/v1", userRoutes);
+app.use("/api/v1",uploadRoutes)
 
 app.get("/", (req, res) => {
   res.send(`<h1>This is hoMEPAGE</h1>`);
