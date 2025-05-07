@@ -135,7 +135,7 @@ const event = async (req, res) => {
           const userid = req.user._id;
   
       // Validate required fields
-      if (!eventname || !textarea || !date || !image ) {
+      if (!eventname || !textarea || !date || !link ) {
         return res.status(400).json({ message: 'All fields are required' });
       }
 
