@@ -127,33 +127,7 @@ const login = async (req, res) => {
 //    }
 
 const event = async (req, res) => {
-    // try {
-    //   const { eventname, textarea, date, link } = req.body;
-  
-    //   // Validate required fields
-    //   if (!eventname || !textarea || !date || !link) {
-    //     return res.status(400).json({ message: 'All fields are required' });
-    //   }
-  
-    //   // Create new event
-    //   const event = await Event.create({ eventname, textarea, date, link });
-  
-    // //   // Save to database
-    // //   await event.save();
-  
-    //   // Respond with success message
-    //   return res.status(201).json({
-    //     message: 'Event created successfully',
-    //     data:event,
-    //   });
-  
-    // } catch (error) {
-    //   console.error('Error creating event:', error);
-    //   return res.status(500).json({
-    //     message: 'Server error, could not create event',
-    //   });
-    // }
-
+    
     try {
         //extract title and desxcription from reauest body
         console.log("req body ", req.body)
@@ -161,7 +135,7 @@ const event = async (req, res) => {
           const userid = req.user._id;
   
       // Validate required fields
-      if (!eventname || !textarea || !date || !link ) {
+      if (!eventname || !textarea || !date  ) {
         return res.status(400).json({ message: 'All fields are required' });
       }
 
